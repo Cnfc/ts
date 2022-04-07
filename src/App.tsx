@@ -1,13 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import UserList from "./components/UserList";
 import "./App.css";
+import AppRouter from "./router/AppRouter";
 
-function App() {
+const App: FC = () => {
   return (
-    <div className="App">
-      <UserList />
+    <div>
+      {/* <UserList /> */}
+      <AppRouter />
     </div>
   );
-}
+};
 
 export default App;
