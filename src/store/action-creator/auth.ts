@@ -32,14 +32,34 @@ export const AuthActionCreators = {
   login: (username: string, password: string) => async (dispatch: any) => {
     try {
       dispatch(AuthActionCreators.SetIsLoading(true));
-      const mochUsers = await axios.get("./users.json");
-      console.log(mochUsers);
+      setTimeout(async () => {
+        const res = await axios.get<IUser[]>("./users.json");
+        console.log(res.data);
+        const mockUser = await res.data.find(
+          (user) => user.username === username && user.password === password
+        );
+
+        console.log(mockUser);
+
+        if (mockUser) {
+          localStorage.setItem("auth", "true");
+          localStorage.setItem("user", mockUser.username);
+          dispatch(AuthActionCreators.setAuth(true));
+          dispatch(AuthActionCreators.setUser(mockUser));
+        } else {
+          dispatch(AuthActionCreators.SetError("Not Correct or invalid"));
+        }
+        dispatch(AuthActionCreators.SetIsLoading(false));
+      }, 1000);
     } catch (error) {
       dispatch(AuthActionCreators.SetError("Error with Login"));
+      dispatch(AuthActionCreators.SetIsLoading(false));
     }
   },
   logout: () => async (dispatch: any) => {
-    try {
-    } catch (e) {}
+    localStorage.removeItem("auth");
+    localStorage.removeItem("username");
+    dispatch(AuthActionCreators.setUser({} as IUser));
+    dispatch(AuthActionCreators.setAuth(false));
   },
 };
