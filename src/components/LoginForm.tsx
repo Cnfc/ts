@@ -4,19 +4,20 @@ import { useDispatch } from "react-redux";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import { rules } from "../utils/rules";
-import { AuthActionCreators } from "../store/action-creator/auth";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
 
 const LoginForm = () => {
   const [userName, setUser] = useState("");
   const [userPassword, setuserPassword] = useState("");
-  const dispatch = useDispatch();
+  const { login } = useActions();
+
   const { isAuth, isLoading, error, user } = useTypedSelector(
     (state) => state.auth
   );
 
   const submit = () => {
-    dispatch(AuthActionCreators.login(userName, userPassword));
+    login(userName, userPassword);
   };
 
   return (

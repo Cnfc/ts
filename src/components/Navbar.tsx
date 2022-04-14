@@ -1,12 +1,13 @@
 import { Layout, Menu, Row } from "antd";
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
-  const { isAuth } = useTypedSelector((state) => state.auth);
+  const { isAuth, user } = useTypedSelector((state) => state.auth);
+  const { logout } = useActions();
 
   return (
     <Layout.Header>
@@ -16,9 +17,9 @@ const Navbar: FC = () => {
             <div>Your name is Max</div>
             <Menu theme="dark" mode="horizontal" selectable={false}>
               <Menu.Item onClick={() => navigate("/login")} key={1}>
-                You are in
+                You are in {user.username}
               </Menu.Item>
-              <Menu.Item onClick={() => {}} key={2}>
+              <Menu.Item onClick={logout()} key={2}>
                 LOGOUT
               </Menu.Item>
               <Menu.Item onClick={() => navigate("/")} key={3}>
