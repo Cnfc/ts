@@ -3,8 +3,8 @@ import React from "react";
 const Protected = () => {
   return (
     <div>
-      Protected ITS
-      <span>STS</span>
+      Protected
+      <span>ITSSTS</span>
     </div>
   );
 };

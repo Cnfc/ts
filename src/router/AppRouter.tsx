@@ -4,13 +4,14 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "../pages/Login";
 import Event from "../pages/Event";
+import Home from "../pages/Home";
 import Protected from "../pages/Protected";
-import App from "../App";
 
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/event" element={<Event />} />
       <Route path="/login" element={<Login />} />
 

@@ -1,7 +1,6 @@
 import { Dispatch } from "redux";
 import { IUser } from "../../models/user";
-// import { AppDispatch } from "../../index";
-
+import { AppDispatch } from "..";
 import {
   SetUserAction,
   SetErrorAction,
@@ -29,33 +28,32 @@ export const AuthActionCreators = {
     payload: error,
   }),
 
-  login: (username: string, password: string) => async (dispatch: any) => {
-    try {
-      dispatch(AuthActionCreators.SetIsLoading(true));
-      setTimeout(async () => {
-        const res = await axios.get<IUser[]>("./users.json");
-        console.log(res.data);
-        const mockUser = await res.data.find(
-          (user) => user.username === username && user.password === password
-        );
+  login:
+    (username: string, password: string) => async (dispatch: AppDispatch) => {
+      try {
+        dispatch(AuthActionCreators.SetIsLoading(true));
+        setTimeout(async () => {
+          const res = await axios.get<IUser[]>("./users.json");
+          const mockUser = res.data.find(
+            (user) => user.username === username && user.password === password
+          );
 
-        console.log(mockUser);
-
-        if (mockUser) {
-          localStorage.setItem("auth", "true");
-          localStorage.setItem("user", mockUser.username);
-          dispatch(AuthActionCreators.setAuth(true));
-          dispatch(AuthActionCreators.setUser(mockUser));
-        } else {
-          dispatch(AuthActionCreators.SetError("Not Correct or invalid"));
-        }
+          if (mockUser) {
+            localStorage.setItem("auth", "true");
+            localStorage.setItem("username", mockUser.username);
+            console.log("works");
+            console.log(localStorage);
+            dispatch(AuthActionCreators.setAuth(true));
+            dispatch(AuthActionCreators.setUser(mockUser));
+          } else {
+            dispatch(AuthActionCreators.SetError("Not Correct or invalid"));
+          }
+        }, 1000);
+      } catch (error) {
+        dispatch(AuthActionCreators.SetError("Error with Login"));
         dispatch(AuthActionCreators.SetIsLoading(false));
-      }, 1000);
-    } catch (error) {
-      dispatch(AuthActionCreators.SetError("Error with Login"));
-      dispatch(AuthActionCreators.SetIsLoading(false));
-    }
-  },
+      }
+    },
   logout: () => async (dispatch: any) => {
     localStorage.removeItem("auth");
     localStorage.removeItem("username");

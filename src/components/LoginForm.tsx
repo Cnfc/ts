@@ -17,6 +17,7 @@ const LoginForm = () => {
   );
 
   const submit = () => {
+    console.log(isAuth, isLoading, error, user);
     login(userName, userPassword);
   };
 

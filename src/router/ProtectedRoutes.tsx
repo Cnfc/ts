@@ -9,6 +9,7 @@ const useAuth = () => {
 
 const ProtectedRoutes = () => {
   const isAuth = useAuth();
+  console.log("Auth is auth", isAuth);
 
   return isAuth ? <Outlet /> : <Login />;
 };
