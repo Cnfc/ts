@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { IUser } from "../../models/user";
+import { IUser } from "../../models/IUser";
 import { AppDispatch } from "..";
 import {
   SetUserAction,
@@ -32,27 +32,28 @@ export const AuthActionCreators = {
     (username: string, password: string) => async (dispatch: AppDispatch) => {
       try {
         dispatch(AuthActionCreators.SetIsLoading(true));
-        setTimeout(async () => {
-          const res = await axios.get<IUser[]>("./users.json");
-          const mockUser = res.data.find(
-            (user) => user.username === username && user.password === password
-          );
+        const res = await axios.get<IUser[]>("./users.json");
+        const mockUser = res.data.find(
+          (user) => user.username === username && user.password === password
+        );
 
-          if (mockUser) {
-            localStorage.setItem("auth", "true");
-            localStorage.setItem("username", mockUser.username);
-            console.log("works");
-            console.log(localStorage);
-            dispatch(AuthActionCreators.setAuth(true));
-            dispatch(AuthActionCreators.setUser(mockUser));
-          } else {
-            dispatch(AuthActionCreators.SetError("Not Correct or invalid"));
-          }
-        }, 1000);
+        if (mockUser) {
+          localStorage.setItem("auth", "true");
+          localStorage.setItem("username", mockUser.username);
+          console.log("works");
+          console.log(localStorage, "firts");
+          dispatch(AuthActionCreators.setAuth(true));
+          // dispatch(AuthActionCreators.setAuth(true));
+          console.log(localStorage, "second");
+          dispatch(AuthActionCreators.setUser(mockUser));
+        } else {
+          dispatch(AuthActionCreators.SetError("Not Correct or invalid"));
+        }
       } catch (error) {
         dispatch(AuthActionCreators.SetError("Error with Login"));
         dispatch(AuthActionCreators.SetIsLoading(false));
       }
+      console.log(localStorage, "last");
     },
   logout: () => async (dispatch: any) => {
     localStorage.removeItem("auth");

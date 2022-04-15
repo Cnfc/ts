@@ -8,8 +8,9 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 
 const LoginForm = () => {
-  const [userName, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [userPassword, setuserPassword] = useState("");
+
   const { login } = useActions();
 
   const { isAuth, isLoading, error, user } = useTypedSelector(
@@ -18,7 +19,8 @@ const LoginForm = () => {
 
   const submit = () => {
     console.log(isAuth, isLoading, error, user);
-    login(userName, userPassword);
+    login(username, userPassword);
+    console.log(isAuth, isLoading, error, user);
   };
 
   return (
@@ -38,7 +40,10 @@ const LoginForm = () => {
           name="username"
           rules={[rules.required("username must be")]}
         >
-          <Input value={userName} onChange={(e) => setUser(e.target.value)} />
+          <Input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -50,9 +55,9 @@ const LoginForm = () => {
             value={userPassword}
             type={"password"}
             onChange={(e) => setuserPassword(e.target.value)}
-            iconRender={(visible) =>
-              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-            }
+            // iconRender={(visible) =>
+            //   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            // }
           />
         </Form.Item>
 

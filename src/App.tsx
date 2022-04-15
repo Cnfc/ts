@@ -5,7 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import AppRouter from "./router/AppRouter";
 import { useActions } from "./hooks/useActions";
-import { IUser } from "./models/user";
+import { IUser } from "./models/IUser";
 
 const App: FC = () => {
   const { setAuth, setUser } = useActions();

@@ -8,6 +8,7 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const { isAuth, user } = useTypedSelector((state) => state.auth);
   const { logout } = useActions();
+  console.log(user, "User is");
 
   return (
     <Layout.Header>
@@ -19,11 +20,17 @@ const Navbar: FC = () => {
               <Menu.Item onClick={() => navigate("/login")} key={1}>
                 You are in {user.username}
               </Menu.Item>
-              <Menu.Item onClick={logout()} key={2}>
+              <Menu.Item onClick={() => logout()} key={2}>
                 LOGOUT
               </Menu.Item>
               <Menu.Item onClick={() => navigate("/")} key={3}>
                 Home
+              </Menu.Item>
+              <Menu.Item onClick={() => navigate("/event")} key={4}>
+                EventPage
+              </Menu.Item>
+              <Menu.Item onClick={() => navigate("/protected")} key={5}>
+                Protected
               </Menu.Item>
             </Menu>
           </>
