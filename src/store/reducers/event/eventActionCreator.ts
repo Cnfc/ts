@@ -17,18 +17,12 @@ export const EventActionCreators = {
 
   fetchGuests: () => async (dispatch: AppDispatch) => {
     try {
-      const { data } = await axios.get("./users.json");
+      const { data } = await axios.get<IUser[]>("./users.json");
+      console.log("data:", data);
 
       dispatch(EventActionCreators.setGuest(data));
     } catch (err) {
-      console.log(err);
+      console.log(err, "MY ERRRO");
     }
   },
-
-  // logout: () => async (dispatch: any) => {
-  //   localStorage.removeItem("auth");
-  //   localStorage.removeItem("username");
-  //   dispatch(AuthActionCreators.setUser({} as IUser));
-  //   dispatch(AuthActionCreators.setAuth(false));
-  // },
 };

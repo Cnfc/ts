@@ -8,13 +8,14 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const Event: FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { fetchUsers } = useActions();
+  const { fetchGuests } = useActions();
   const { guests } = useTypedSelector((state) => state.event);
 
   useEffect(() => {
-    fetchUsers();
+    fetchGuests();
   }, []);
 
+  console.log(guests, "Guest IS");
   return (
     <div>
       Event

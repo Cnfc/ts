@@ -17,30 +17,40 @@ const EventForm: FC<EventFormProps> = ({ guests }) => {
     description: "",
   } as IEvent);
 
-  const onchange = () => {};
-
   return (
     <Form>
-      <Form.Item label="Events name" name="date" rules={[rules.required()]}>
-        <Input />
+      <Form.Item
+        label="Events name"
+        name="description"
+        rules={[rules.required("Title required")]}
+      >
+        <Input
+          value={event.description}
+          onChange={(e) => setEvent({ ...event, description: e.target.value })}
+        />
       </Form.Item>
-      <DatePicker onChange={onchange} />
+
+      <Form.Item
+        label="Events date"
+        name="date"
+        rules={[rules.required("Date required")]}
+      >
+        <DatePicker onChange={} />
+      </Form.Item>
+
       <Form.Item
         label="Pick Guest"
         name="guest"
-        rules={[rules.required()]}
-      ></Form.Item>
-
-      <Select
-        defaultValue="lucy"
-        onChange={(guest: string) => setEvent({ ...event, guest })}
+        rules={[rules.required("Guest required")]}
       >
-        {guests.map((guest) => (
-          <Select.Option value={guest.username} key={guest.username}>
-            {guest.username}
-          </Select.Option>
-        ))}
-      </Select>
+        <Select onChange={(guest: string) => setEvent({ ...event, guest })}>
+          {guests.map((guest) => (
+            <Select.Option value={guest.username} key={guest.username}>
+              {guest.username}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
 
       <Row justify="end">
         <Form.Item>

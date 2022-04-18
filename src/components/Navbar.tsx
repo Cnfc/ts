@@ -8,7 +8,6 @@ const Navbar: FC = () => {
   const navigate = useNavigate();
   const { isAuth, user } = useTypedSelector((state) => state.auth);
   const { logout } = useActions();
-  console.log(user, "User is");
 
   return (
     <Layout.Header>
