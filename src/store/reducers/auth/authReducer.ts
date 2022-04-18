@@ -1,4 +1,4 @@
-import { AuthState, AuthAction, AuthActionEnums } from "./auth";
+import { AuthState, AuthAction, AuthActionEnums } from "./authTypes";
 import { IUser } from "../../../models/IUser";
 
 const initialState: AuthState = {

@@ -1,13 +1,13 @@
 import { Dispatch } from "redux";
-import { IUser } from "../../models/IUser";
-import { AppDispatch } from "..";
+import { IUser } from "../../../models/IUser";
+import { AppDispatch } from "../..";
 import {
   SetUserAction,
   SetErrorAction,
   AuthActionEnums,
   SetAuthAction,
   SetIsLoadingAction,
-} from "../reducers/auth/auth";
+} from "./authTypes";
 import axios from "axios";
 
 export const AuthActionCreators = {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { fetchUsers } from "../store/action-creator/user";
+import { fetchUsers } from "../store/reducers/users/user";
 
 const UserList = () => {
   const { users, error, loading } = useTypedSelector((store) => store.user);
