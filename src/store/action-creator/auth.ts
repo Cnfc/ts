@@ -7,7 +7,7 @@ import {
   AuthActionEnums,
   SetAuthAction,
   SetIsLoadingAction,
-} from "../../types/auth";
+} from "../reducers/auth/auth";
 import axios from "axios";
 
 export const AuthActionCreators = {
