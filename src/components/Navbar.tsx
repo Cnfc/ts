@@ -16,7 +16,7 @@ const Navbar: FC = () => {
           <>
             <div>Your name is Max</div>
             <Menu theme="dark" mode="horizontal" selectable={false}>
-              <Menu.Item onClick={() => navigate("/login")} key={1}>
+              <Menu.Item onClick={() => navigate("/")} key={1}>
                 You are in {user.username}
               </Menu.Item>
               <Menu.Item onClick={() => logout()} key={2}>

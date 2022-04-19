@@ -18,11 +18,37 @@ export const EventActionCreators = {
   fetchGuests: () => async (dispatch: AppDispatch) => {
     try {
       const { data } = await axios.get<IUser[]>("./users.json");
-      console.log("data:", data);
 
       dispatch(EventActionCreators.setGuest(data));
     } catch (err) {
       console.log(err, "MY ERRRO");
+    }
+  },
+
+  createEvent: (event: IEvent) => async (dispatch: AppDispatch) => {
+    try {
+      const events = localStorage.getItem("events") || "[]";
+      const json = JSON.parse(events) as IEvent[];
+      json.push(event);
+      dispatch(EventActionCreators.setEvent(json));
+      localStorage.setItem("events", JSON.stringify(json));
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  fetchEvents: (userName: string) => async (dispatch: AppDispatch) => {
+    try {
+      const events = localStorage.getItem("events") || "[]";
+      const json = JSON.parse(events) as IEvent[];
+      console.log(json, "FetchUsers");
+      const currentUserEvents = json.filter(
+        (ev) => ev.author === userName || ev.guest === userName
+      );
+
+      dispatch(EventActionCreators.setEvent(currentUserEvents));
+    } catch (error) {
+      console.error(error);
     }
   },
 };
