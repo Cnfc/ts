@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Checkbox } from "antd";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Button, Form, Input, Checkbox } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import { rules } from "../utils/rules";
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [userPassword, setuserPassword] = useState("");
 
+  const navigate = useNavigate();
   const { login } = useActions();
 
   const { isAuth, isLoading, error, user } = useTypedSelector(
@@ -18,9 +20,10 @@ const LoginForm = () => {
   );
 
   const submit = () => {
-    console.log(isAuth, isLoading, error, user);
-    login(username, userPassword);
-    console.log(isAuth, isLoading, error, user);
+    try {
+      login(username, userPassword);
+      navigate("/event");
+    } catch (error) {}
   };
 
   return (

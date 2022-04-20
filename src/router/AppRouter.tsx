@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "../pages/Login";
@@ -14,6 +14,7 @@ const AppRouter = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/event" element={<Event />} />
       <Route path="/login" element={<Login />} />
+      {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/protected" element={<Protected />} />

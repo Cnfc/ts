@@ -8,5 +8,3 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   event: eventReducer,
 });
-
-export type RootReducer = ReturnType<typeof rootReducer>;
