@@ -5,6 +5,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "../pages/Login";
 import Event from "../pages/Event";
 import Home from "../pages/Home";
+import Sv from "../pages/SV/Sv";
 import Protected from "../pages/Protected";
 
 const AppRouter = () => {
@@ -14,6 +15,7 @@ const AppRouter = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/event" element={<Event />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/sv" element={<Sv />} />
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
 
       <Route element={<ProtectedRoutes />}>
