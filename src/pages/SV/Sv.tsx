@@ -1,37 +1,57 @@
+import { Input } from "antd";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
+import { makeStyles, Typography, Slider } from "@material-ui/core";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import _ from "lodash";
+import { useDebounce, useDebouncedFunction } from "../../hooks/useDebounce";
 
-const Sv = () => {
-  const [data, setData] = useState("");
+const useStyles = makeStyles({
+  root: {
+    width: 500,
+  },
+});
 
-  const fetchData = async () => {
-    const { data }: any = await axios.get("http://localhost:3333/data");
-    setData(data);
+function valuetext(value: any) {
+  return `${value}°C`;
+}
+
+export function valueLogging(value: any) {
+  console.log(`Request processed. Value: ${value}`);
+}
+
+function Sv() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState([20, 37]);
+
+  const debouncedValueLogging = useDebouncedFunction(valueLogging, 300);
+  const deb = useDebounce(valueLogging, 1200);
+
+  const handleChange = (event: any, newValue: any) => {
+    setValue(newValue);
+    deb(newValue);
+    // debouncedValueLogging(newValue);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const a = "foo";
-  const b = "foo";
-  const x = {};
-  const y = {};
-
-  console.log("sad", undefined === undefined);
-  console.log(a === b);
-  console.log(x === y);
-  // console.log(a.prototype);
-  // console.log(x.prototype);
-  // console.log(x.__proto__);
-
-  console.log(data);
   return (
-    <div>
-      Sv
-      <span>Body of request</span>
+    <div className={classes.root}>
+      <Typography id="range-slider" gutterBottom>
+        Temperature range
+      </Typography>
+      <Slider
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+        getAriaValueText={valuetext}
+      />
     </div>
   );
-};
+}
 
 export default Sv;
