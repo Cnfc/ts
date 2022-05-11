@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import RevealAnimate from "components/RevealAnimate";
 
 interface IFooBar {
   foo: number;
   bar: string;
 }
-
 const fooBars: Array<IFooBar> = [
   {
     foo: 2,
@@ -19,7 +19,6 @@ const fooBars: Array<IFooBar> = [
     bar: "bar3",
   },
 ];
-
 const sortByFoo = (fooBars: any) => {
   const me: any = [];
   fooBars.map((i: any) => {
@@ -41,13 +40,23 @@ const TSSearch = () => {
     });
   }
   const me = sortByKey<IFooBar>(fooBars, "foo");
-
   console.log(me);
+
+  const [one, setOne] = useState(0);
+
+  console.log(one);
+
+  useEffect(() => {
+    setOne((v) => v + 1);
+  }, []);
 
   return (
     <div>
       TSSearch
       <span>TSSearch</span>
+      <div>
+        <RevealAnimate text="buttonnnn" />
+      </div>
     </div>
   );
 };
