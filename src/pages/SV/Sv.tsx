@@ -1,11 +1,5 @@
 import { Input } from "antd";
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { makeStyles, Typography, Slider } from "@material-ui/core";
 import axios from "axios";
 import _ from "lodash";

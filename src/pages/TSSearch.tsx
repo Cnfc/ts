@@ -66,7 +66,13 @@ const TSSearch = () => {
       <span>TSSearch</span>
       <div>
         <RevealAnimate text="buttonnnn" />
-        <SearchInput setSearchQuery={setQuery} />
+        <SearchInput
+          setSearchQuery={(query) => {
+            console.log("Aim");
+
+            setQuery(query);
+          }}
+        />
         {widgets
           .filter((widget) => genericSearch(widget, ["order", "title"], query, true))
           .map((widget) => (

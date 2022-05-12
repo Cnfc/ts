@@ -1,5 +1,6 @@
 import { useCallback, useRef } from "react";
 
+// ===================  v1  ===================================
 export function useDebouncedFunction(func, delay) {
   const ref = useRef(null);
 
@@ -9,6 +10,7 @@ export function useDebouncedFunction(func, delay) {
   };
 }
 
+// ===================== v2 ==================================
 export function useDebouncedFunction2(func, delay) {
   let timeoutId;
 
@@ -18,6 +20,7 @@ export function useDebouncedFunction2(func, delay) {
   };
 }
 
+// ===================   v3    ===========================
 export function useDebounce(callback, delay) {
   const timer = useRef(null);
 
@@ -35,3 +38,5 @@ export function useDebounce(callback, delay) {
   );
   return deboundecCallback;
 }
+
+//  ======================  v4  =====================

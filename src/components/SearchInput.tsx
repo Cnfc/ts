@@ -1,4 +1,6 @@
-import React from "react";
+import { useDebounce } from "hooks/useDebounce";
+import { useDebounces } from "hooks/useDebounces";
+import React, { useEffect, useState } from "react";
 
 interface ISearchInputProps {
   setSearchQuery: (searchQuery: string) => void;
@@ -6,6 +8,13 @@ interface ISearchInputProps {
 
 const SearchInput = (props: ISearchInputProps) => {
   const { setSearchQuery } = props;
+  const [query, setQuery] = useState<string>("");
+
+  const deboncedQuery = useDebounces(query, 250);
+
+  useEffect(() => {
+    setSearchQuery(deboncedQuery);
+  }, [deboncedQuery, setSearchQuery]);
 
   return (
     <>
@@ -15,7 +24,10 @@ const SearchInput = (props: ISearchInputProps) => {
         type="search"
         placeholder="Search..."
         aria-label="Search"
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+          console.log("e");
+          setQuery(e.target.value);
+        }}
       />
     </>
   );
