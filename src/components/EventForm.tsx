@@ -37,11 +37,7 @@ const EventForm: FC<EventFormProps> = ({ guests, submit }) => {
 
   return (
     <Form onFinish={submitForm}>
-      <Form.Item
-        label="Events name"
-        name="description"
-        rules={[rules.required("Title required")]}
-      >
+      <Form.Item label="Events name" name="description" rules={[rules.required("Title required")]}>
         <Input
           value={event.description}
           onChange={(e) => setEvent({ ...event, description: e.target.value })}
@@ -51,19 +47,12 @@ const EventForm: FC<EventFormProps> = ({ guests, submit }) => {
       <Form.Item
         label="Events date"
         name="date"
-        rules={[
-          rules.required("Date required"),
-          rules.isDateAfter("Denied Pass Date"),
-        ]}
+        rules={[rules.required("Date required"), rules.isDateAfter("Denied Pass Date")]}
       >
         <DatePicker onChange={(e) => selectDate(e)} />
       </Form.Item>
 
-      <Form.Item
-        label="Pick Guest"
-        name="guest"
-        rules={[rules.required("Guest required")]}
-      >
+      <Form.Item label="Pick Guest" name="guest" rules={[rules.required("Guest required")]}>
         <Select onChange={(guest: string) => setEvent({ ...event, guest })}>
           {guests.map((guest) => (
             <Select.Option value={guest.username} key={guest.username}>
