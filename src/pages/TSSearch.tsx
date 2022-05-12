@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RevealAnimate from "components/RevealAnimate";
+import genericSearch from "utils/genericSearch";
+import SearchInput from "components/SearchInput";
 
 interface IFooBar {
   foo: number;
@@ -50,12 +52,26 @@ const TSSearch = () => {
     setOne((v) => v + 1);
   }, []);
 
+  const widgets = [
+    { title: "Vasy", description: "1th", order: 3 },
+    { title: "Pety", description: "2th", order: 1 },
+    { title: "Stas", description: "3th", order: 2 },
+  ];
+
+  const [query, setQuery] = useState<string>("");
+
   return (
     <div>
       TSSearch
       <span>TSSearch</span>
       <div>
         <RevealAnimate text="buttonnnn" />
+        <SearchInput setSearchQuery={setQuery} />
+        {widgets
+          .filter((widget) => genericSearch(widget, ["order", "title"], query, true))
+          .map((widget) => (
+            <h3>{widget.title}</h3>
+          ))}
       </div>
     </div>
   );
