@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RevealAnimate from "components/RevealAnimate";
 import genericSearch from "utils/genericSearch";
 import genericSort from "utils/genericSort";
+import IProperty from "models/IProperty";
 import SearchInput from "components/SearchInput";
 
 interface IFooBar {
@@ -60,6 +61,7 @@ const TSSearch = () => {
   ];
 
   const [query, setQuery] = useState<string>("");
+  const [property, setProperty] = useState<IProperty<IFooBar>>({ property: "title" });
 
   return (
     <div>
@@ -77,8 +79,8 @@ const TSSearch = () => {
         {widgets
           .filter((widget) => genericSearch(widget, ["order", "title"], query, true))
           .sort((a, b) => {
-            return genericSort(a, b, 'title')
-          });
+            return genericSort(a, b, property.property);
+          })
           .map((widget) => (
             <h3>{widget.title}</h3>
           ))}
