@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RevealAnimate from "components/RevealAnimate";
 import genericSearch from "utils/genericSearch";
+import genericSort from "utils/genericSort";
 import SearchInput from "components/SearchInput";
 
 interface IFooBar {
@@ -75,6 +76,9 @@ const TSSearch = () => {
         />
         {widgets
           .filter((widget) => genericSearch(widget, ["order", "title"], query, true))
+          .sort((a, b) => {
+            return genericSort(a, b, 'title')
+          });
           .map((widget) => (
             <h3>{widget.title}</h3>
           ))}

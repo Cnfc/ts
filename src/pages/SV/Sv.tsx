@@ -29,7 +29,6 @@ function Sv() {
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
     deb(newValue);
-    // debouncedValueLogging(newValue);
   };
 
   return (
